@@ -88,6 +88,38 @@
             box-shadow: 0 4px 10px rgba(255,255,255,0.3);
         }
 
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 101;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 3px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
         /* Hero Section */
         .hero {
             background: linear-gradient(135deg, var(--rice-blue) 0%, var(--rice-blue-light) 100%);
@@ -412,9 +444,30 @@
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
             nav ul {
+                position: fixed;
+                left: -100%;
+                top: 70px;
                 flex-direction: column;
-                gap: 0.5rem;
+                background-color: var(--rice-blue);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                padding: 2rem 0;
+                gap: 0;
+            }
+
+            nav ul.active {
+                left: 0;
+            }
+
+            nav ul li {
+                margin: 1rem 0;
             }
 
             .hero h1 {
@@ -470,7 +523,12 @@
     <nav>
         <div class="container">
             <a href="#home" class="logo">Samer Marmash</a>
-            <ul>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul id="nav-menu">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#projects">Projects</a></li>
@@ -547,17 +605,6 @@
             <p class="subtitle">A selection of mechanical engineering projects showcasing design, prototyping, and problem-solving</p>
             
             <div class="projects-grid">
-                <!-- Prosthetic Hand -->
-                <div class="project-card" onclick="window.location.href='prosthetic-hand.html'">
-                    <img src="prosthetic-assembly.png" alt="Robotic Prosthetic Hand">
-                    <div class="content">
-                        <span class="status in-progress">In Progress</span>
-                        <h3>Robotic Prosthetic Hand with Haptic Feedback</h3>
-                        <p class="tech">Arduino • Fusion 360 • FSR Sensors • Servo Motors</p>
-                        <p>Designed 5-finger articulated prosthetic with force-sensitive haptic feedback enabling users to feel grip pressure through vibration motors.</p>
-                    </div>
-                </div>
-
                 <!-- Telemetry System -->
                 <div class="project-card" onclick="window.location.href='telemetry-system.html'">
                     <img src="samer-launch-site-2.jpg" alt="Rocket Telemetry System">
@@ -577,6 +624,17 @@
                         <h3>Custom Electric Bike Build</h3>
                         <p class="tech">Carbon Fiber • 3D Printing • TPU Throttle • Electrical Systems</p>
                         <p>Built custom e-bike from individual components with carbon fiber weight reduction and 5-iteration TPU thumb throttle. Two years of daily use for campus commuting.</p>
+                    </div>
+                </div>
+
+                <!-- Prosthetic Hand -->
+                <div class="project-card" onclick="window.location.href='prosthetic-hand.html'">
+                    <img src="prosthetic-assembly.png" alt="Robotic Prosthetic Hand">
+                    <div class="content">
+                        <span class="status in-progress">In Progress</span>
+                        <h3>Robotic Prosthetic Hand with Haptic Feedback</h3>
+                        <p class="tech">Arduino • Fusion 360 • FSR Sensors • Servo Motors</p>
+                        <p>Designed 5-finger articulated prosthetic with force-sensitive haptic feedback enabling users to feel grip pressure through vibration motors.</p>
                     </div>
                 </div>
 
@@ -621,5 +679,24 @@
             <a href="https://linkedin.com/in/samermarmash" target="_blank">LinkedIn</a>
         </p>
     </footer>
+
+    <script>
+        // Hamburger menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('#nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
 </body>
 </html>

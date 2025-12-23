@@ -70,6 +70,38 @@
             opacity: 0.8;
         }
 
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 101;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 3px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
         .project-header {
             background: linear-gradient(135deg, var(--rice-blue) 0%, var(--rice-blue-light) 100%);
             color: white;
@@ -224,9 +256,30 @@
         }
 
         @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
             nav ul {
+                position: fixed;
+                left: -100%;
+                top: 70px;
                 flex-direction: column;
-                gap: 0.5rem;
+                background-color: var(--rice-blue);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                padding: 2rem 0;
+                gap: 0;
+            }
+
+            nav ul.active {
+                left: 0;
+            }
+
+            nav ul li {
+                margin: 1rem 0;
             }
 
             .project-header h1 {
@@ -243,7 +296,12 @@
     <nav>
         <div class="container">
             <a href="index.html" class="logo">Samer Marmash</a>
-            <ul>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul id="nav-menu">
                 <li><a href="index.html#home">Home</a></li>
                 <li><a href="index.html#about">About</a></li>
                 <li><a href="index.html#projects">Projects</a></li>
@@ -471,9 +529,28 @@
     <footer>
         <p>&copy; 2025 Samer Marmash | Mechanical Engineering @ Rice University</p>
         <p style="margin-top: 0.5rem;">
-            <a href="mailto:samer.marmash@rice.edu">Email</a> | 
+            <a href="mailto:samer.marmash@rice.edu">Email</a> |
             <a href="https://linkedin.com/in/samermarmash" target="_blank">LinkedIn</a>
         </p>
     </footer>
+
+    <script>
+        // Hamburger menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('#nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
 </body>
 </html>
