@@ -429,13 +429,15 @@
             </div>
         </div>
 
-        <!-- PLACEHOLDER: Add antenna radiation pattern diagrams here -->
-        <div class="highlight-box">
-            <p><strong>📷 IMAGE PLACEHOLDER:</strong> Add two side-by-side diagrams showing:</p>
-            <ul>
-                <li>Left: Omnidirectional antenna radiation pattern (360° donut shape with blind spot above)</li>
-                <li>Right: Yagi antenna radiation pattern (narrow directional cone)</li>
-            </ul>
+        <div class="two-col-grid">
+            <div class="image-container">
+                <img src="omni-pattern.png" alt="Omnidirectional antenna radiation pattern">
+                <p class="image-caption">Omnidirectional antenna radiation pattern - 360° coverage with blind spot above</p>
+            </div>
+            <div class="image-container">
+                <img src="yagi-pattern.png" alt="Yagi antenna radiation pattern">
+                <p class="image-caption">Yagi antenna radiation pattern - narrow directional beam</p>
+            </div>
         </div>
 
         <h2>Design Criteria</h2>
@@ -502,9 +504,9 @@
             </tbody>
         </table>
 
-        <!-- PLACEHOLDER: Pairwise comparison chart -->
-        <div class="highlight-box">
-            <p><strong>📷 IMAGE PLACEHOLDER:</strong> Add pairwise comparison matrix image showing how criteria were ranked (should show Stability=6 points, Rotation=5, Height=4, etc.)</p>
+        <div class="image-container">
+            <img src="pairwise-comparison.jpg" alt="Pairwise comparison matrix">
+            <p class="image-caption">Pairwise comparison matrix showing how design criteria were ranked</p>
         </div>
 
         <h2>Design Process</h2>
@@ -525,9 +527,9 @@
             <li>Rotation Action: How operators control and lock rotation</li>
         </ul>
 
-        <!-- PLACEHOLDER: Design blocks diagram -->
-        <div class="highlight-box">
-            <p><strong>📷 IMAGE PLACEHOLDER:</strong> Add design blocks flowchart showing functional decomposition of antenna mount problem into manageable components</p>
+        <div class="image-container">
+            <img src="design-blocks.jpg" alt="Design blocks flowchart">
+            <p class="image-caption">Design blocks showing functional decomposition of the antenna mount problem</p>
         </div>
 
         <h3>Brainstorming & Concept Development</h3>
@@ -551,9 +553,9 @@
             <li>Total: 61 unique ideas → 8 complete concepts, 53 partial concepts</li>
         </ul>
 
-        <!-- PLACEHOLDER: Brainstorming documentation -->
-        <div class="highlight-box">
-            <p><strong>📷 IMAGE PLACEHOLDER:</strong> Add brainstorming session photo or documented ideas sheet showing team ideation process</p>
+        <div class="image-container">
+            <img src="brainstorming.jpg" alt="Brainstorming session">
+            <p class="image-caption">Team brainstorming session documenting initial design ideas</p>
         </div>
 
         <h3>Screening & Morphing</h3>
@@ -572,9 +574,9 @@
             <li>30 Yagi mount designs</li>
         </ul>
 
-        <!-- PLACEHOLDER: Morph chart -->
-        <div class="highlight-box">
-            <p><strong>📷 IMAGE PLACEHOLDER:</strong> Add morphological chart showing how partial ideas were combined across design blocks to create complete concepts</p>
+        <div class="image-container">
+            <img src="morph-chart.jpg" alt="Morphological chart">
+            <p class="image-caption">Morphological chart showing systematic combination of partial ideas into complete concepts</p>
         </div>
 
         <h3>Final Selection</h3>
@@ -587,9 +589,9 @@
             <li><strong>Yagi Initial Winner (3.85/5.0):</strong> Backpack base + telescopic pole + ball joint rotation</li>
         </ul>
 
-        <!-- PLACEHOLDER: Scoring matrix -->
-        <div class="highlight-box">
-            <p><strong>📷 IMAGE PLACEHOLDER:</strong> Add weighted scoring matrix showing finalist designs evaluated against criteria with numerical scores</p>
+        <div class="image-container">
+            <img src="scoring-matrix.jpg" alt="Weighted scoring matrix">
+            <p class="image-caption">Weighted scoring matrix evaluating finalist designs against prioritized criteria</p>
         </div>
 
         <h2>Critical Design Pivot</h2>
@@ -611,9 +613,9 @@
             </ul>
         </div>
 
-        <!-- PLACEHOLDER: Backpack prototype -->
-        <div class="highlight-box">
-            <p><strong>📷 IMAGE PLACEHOLDER:</strong> Add photo of backpack-mounted Yagi prototype that was abandoned after client feedback (if available from EDES project)</p>
+        <div class="image-container">
+            <img src="backpack-prototype.jpg" alt="Backpack-mounted Yagi prototype">
+            <p class="image-caption">Initial backpack-mounted Yagi prototype, later abandoned after client feedback revealed stability concerns</p>
         </div>
 
         <h2>Final Design Specifications</h2>
@@ -627,9 +629,9 @@
             <li>Compact collapsed footprint (<10 sq ft)</li>
         </ul>
 
-        <!-- PLACEHOLDER: Final Omni design -->
-        <div class="highlight-box">
-            <p><strong>📷 IMAGE PLACEHOLDER:</strong> Add final Omni mount design rendering or photo showing tripod base with folding extension sticks</p>
+        <div class="image-container">
+            <img src="omni-low-fi.jpg" alt="Omni mount design">
+            <p class="image-caption">Omni mount with tripod base and folding extension sticks reaching 10+ feet</p>
         </div>
 
         <h3>Yagi Mount Design</h3>
@@ -641,9 +643,23 @@
             <li>Ergonomic handle for operator control</li>
         </ul>
 
-        <!-- PLACEHOLDER: Final Yagi design -->
-        <div class="highlight-box">
-            <p><strong>📷 IMAGE PLACEHOLDER:</strong> Add final Yagi mount design rendering or photo showing tripod with ball joint and mounted antenna</p>
+        <div class="image-grid">
+            <div class="image-container">
+                <img src="yagi-low-fi.jpg" alt="Low-fidelity Yagi prototype">
+                <p class="image-caption">Low-fidelity Yagi mount prototype</p>
+            </div>
+            <div class="image-container">
+                <img src="yagi-med-fi.jpg" alt="Medium-fidelity Yagi prototype">
+                <p class="image-caption">Medium-fidelity Yagi mount with functional materials</p>
+            </div>
+            <div class="image-container">
+                <img src="yagi-high-fi.jpg" alt="High-fidelity Yagi mount">
+                <p class="image-caption">High-fidelity Yagi mount with ball joint rotation</p>
+            </div>
+            <div class="image-container">
+                <img src="yagi-ball-joint.jpg" alt="Yagi ball joint detail">
+                <p class="image-caption">Ball joint mechanism enabling 0-90° rotation</p>
+            </div>
         </div>
 
         <p><strong>Materials Selected:</strong></p>
@@ -676,9 +692,23 @@
             <li><strong>Cam Lever Clamps (Final):</strong> Quick-release, secure, no tools needed ✓</li>
         </ol>
 
-        <!-- PLACEHOLDER: Hinge iterations -->
-        <div class="highlight-box">
-            <p><strong>📷 IMAGE PLACEHOLDER:</strong> Add 3-4 photos showing hinge lock evolution: bolt system → 3D printed clip → cam lever final design</p>
+        <div class="image-grid">
+            <div class="image-container">
+                <img src="hinge-bolt.jpg" alt="Bolt and nut hinge">
+                <p class="image-caption">Version 1: Bolt & nut - secure but required tools</p>
+            </div>
+            <div class="image-container">
+                <img src="hinge-3d-printed.jpg" alt="3D-printed clip hinge">
+                <p class="image-caption">Version 2: 3D-printed clips - tool-free but deformed under use</p>
+            </div>
+            <div class="image-container">
+                <img src="hinge-cam-lever.jpg" alt="Cam lever hinge">
+                <p class="image-caption">Version 3: Cam lever clamps - quick-release and secure</p>
+            </div>
+            <div class="image-container">
+                <img src="hinge-final.jpg" alt="Final hinge assembly">
+                <p class="image-caption">Final hinge assembly in use on Omni mount</p>
+            </div>
         </div>
 
         <h2>My Contributions</h2>
