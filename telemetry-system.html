@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rocket Telemetry System | Samer Marmash</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --rice-blue: #00205B;
+            --rice-blue-light: #003C71;
+            --accent: #007396;
+            --bg: #ffffff;
+            --text: #333333;
+            --light-bg: #f5f7fa;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+        }
+
+        nav {
+            background: var(--rice-blue);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: white;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        .project-header {
+            background: linear-gradient(135deg, var(--rice-blue) 0%, var(--rice-blue-light) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .project-header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-header .meta {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .project-header .status {
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            background: rgba(40, 167, 69, 0.3);
+            border-radius: 20px;
+            margin-top: 1rem;
+            font-weight: 600;
+        }
+
+        .project-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .project-content h2 {
+            color: var(--rice-blue);
+            margin: 2.5rem 0 1rem 0;
+            font-size: 2rem;
+            border-bottom: 3px solid var(--accent);
+            padding-bottom: 0.5rem;
+        }
+
+        .project-content h3 {
+            color: var(--rice-blue);
+            margin: 2rem 0 0.8rem 0;
+            font-size: 1.5rem;
+        }
+
+        .project-content h4 {
+            color: var(--rice-blue);
+            margin: 1.5rem 0 0.5rem 0;
+            font-size: 1.2rem;
+        }
+
+        .project-content p {
+            margin-bottom: 1.2rem;
+            line-height: 1.8;
+        }
+
+        .project-content ul, .project-content ol {
+            margin-left: 2rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .project-content li {
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .two-col-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .image-container {
+            text-align: center;
+        }
+
+        .image-container img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 0.5rem;
+        }
+
+        .image-caption {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        .highlight-box {
+            background: var(--light-bg);
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 5px;
+        }
+
+        .highlight-box h3 {
+            margin-top: 0;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin: 2rem 0;
+            padding: 0.8rem 1.5rem;
+            background: var(--rice-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: opacity 0.3s;
+        }
+
+        .back-button:hover {
+            opacity: 0.9;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-box {
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-box .number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            display: block;
+        }
+
+        .stat-box .label {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .mission-box {
+            background: linear-gradient(135deg, var(--accent) 0%, #005a7a 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: var(--rice-blue);
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: var(--light-bg);
+        }
+
+        footer {
+            background: var(--rice-blue);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .project-header h1 {
+                font-size: 2rem;
+            }
+
+            .image-grid, .two-col-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="portfolio.html" class="logo">Samer Marmash</a>
+            <ul>
+                <li><a href="portfolio.html#home">Home</a></li>
+                <li><a href="portfolio.html#about">About</a></li>
+                <li><a href="portfolio.html#projects">Projects</a></li>
+                <li><a href="portfolio.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="project-header">
+        <h1>Rocket Telemetry Antenna Mounts</h1>
+        <p class="meta">August 2025 - December 2025 | Rice Eclipse Team Project</p>
+        <span class="status">✅ Completed & Field-Tested</span>
+    </div>
+
+    <div class="project-content">
+        <a href="portfolio.html#projects" class="back-button">← Back to Projects</a>
+
+        <div class="image-grid">
+            <div class="image-container">
+                <img src="samer-launch-site-1.jpg" alt="Testing Yagi antenna at launch site">
+                <p class="image-caption">Testing the Yagi antenna mount at Rice Eclipse launch site in Midland, Texas</p>
+            </div>
+            <div class="image-container">
+                <img src="samer-launch-site-2.jpg" alt="Field deployment with both antenna systems">
+                <p class="image-caption">Both Omni and Yagi antenna mounts deployed at the launch site</p>
+            </div>
+        </div>
+
+        <h2>Project Overview</h2>
+
+        <div class="mission-box">
+            <strong>Mission:</strong> Design reliable, repeatable antenna mounting systems that enable stable telemetry communication throughout rocket launches, supporting Rice Eclipse's goal to reach 100,000 feet altitude.
+        </div>
+
+        <p>As part of Rice Eclipse's telemetry team (the TeleTubbies), I worked with four teammates to solve a critical problem: their current antenna setup was improvised, unstable, and limiting their ability to maintain communication with rockets during launch. Antennas were literally taped to random objects, and the Yagi directional antenna had to be manually held throughout entire launches—exhausting and imprecise.</p>
+
+        <p>Our challenge was to design professional mounting systems for two different antennas: an omnidirectional antenna that needed to reach 10+ feet to clear obstacles, and a Yagi directional antenna that operators could smoothly track from 0° (horizontal) to 90° (vertical) as the rocket ascended.</p>
+
+        <h2>The Client: Rice Eclipse</h2>
+
+        <p>Rice Eclipse is the university's competitive rocketry club, competing annually at the Intercollegiate Rocket Engineering Competition (IREC) in Midland, Texas. In their 2024 launch, they achieved an impressive 25,163 feet altitude. Their ambitious goal? Reach 100,000 feet—which requires flawless telemetry to track rocket performance, altitude, and systems throughout flight.</p>
+
+        <div class="stats-grid">
+            <div class="stat-box">
+                <span class="number">25,163 ft</span>
+                <span class="label">2024 Launch Altitude</span>
+            </div>
+            <div class="stat-box">
+                <span class="number">100,000 ft</span>
+                <span class="label">Target Altitude</span>
+            </div>
+            <div class="stat-box">
+                <span class="number">18-20 mph</span>
+                <span class="label">Launch Site Winds</span>
+            </div>
+            <div class="stat-box">
+                <span class="number">180°F</span>
+                <span class="label">Max Temperature</span>
+            </div>
+        </div>
+
+        <h3>Current Limitations</h3>
+        <ul>
+            <li><strong>Height Constraints:</strong> Antennas taped to random objects couldn't clear the 10-foot canopy, reducing signal range</li>
+            <li><strong>Unstable Positioning:</strong> Yagi antenna manually held throughout launch—physically demanding and imprecise</li>
+            <li><strong>Non-Repeatable Setup:</strong> Each launch required new improvised configuration, making performance assessment difficult</li>
+            <li><strong>Poor Wind Resistance:</strong> Setups prone to tipping in 18-20 mph Midland, Texas winds</li>
+        </ul>
+
+        <h2>Understanding the Antennas</h2>
+
+        <div class="two-col-grid">
+            <div>
+                <h4>Omnidirectional Antenna (Omni)</h4>
+                <p>Receives signals in a 360° horizontal radius with a blind spot directly above. Can remain stationary once positioned. Needs ≥10 ft elevation to clear obstacles and maximize range.</p>
+            </div>
+            <div>
+                <h4>Yagi Antenna</h4>
+                <p>Receives signals only from the direction it's pointed in a narrow cone. Must rotate from 0° (horizontal) to 90° (vertical) to track rocket ascent. Requires precise aiming throughout launch.</p>
+            </div>
+        </div>
+
+        <!-- PLACEHOLDER: Add antenna radiation pattern diagrams here -->
+        <div class="highlight-box">
+            <p><strong>📷 IMAGE PLACEHOLDER:</strong> Add two side-by-side diagrams showing:</p>
+            <ul>
+                <li>Left: Omnidirectional antenna radiation pattern (360° donut shape with blind spot above)</li>
+                <li>Right: Yagi antenna radiation pattern (narrow directional cone)</li>
+            </ul>
+        </div>
+
+        <h2>Design Criteria</h2>
+
+        <p>Working closely with Rice Eclipse, we established one critical constraint and seven design objectives, then prioritized them using pairwise comparison.</p>
+
+        <h3>Constraint</h3>
+        <p><strong>Hold Current Antennas:</strong> Must accommodate 1x Omni (≥3 lbs) and 1x Yagi (≥6 lbs) and interface with Eclipse's existing equipment.</p>
+
+        <h3>Design Objectives (Prioritized)</h3>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Criterion</th>
+                    <th>Target</th>
+                    <th>Justification</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Stability</td>
+                    <td>Antenna tip ≤8" movement in 18-20 mph wind</td>
+                    <td>Excessive movement disrupts connection; critical for reliable telemetry</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Rotation</td>
+                    <td>Yagi rotates 0-90° vertically</td>
+                    <td>Must track rocket from ground to apex to maintain connection</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Height</td>
+                    <td>Omni ≥10 ft, Yagi 4-5 ft</td>
+                    <td>Omni must clear 10 ft canopy; Yagi at comfortable operator height</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Ease of Use</td>
+                    <td>Setup ≤30 minutes</td>
+                    <td>Launch prep takes 30-45 min; shouldn't add significant time</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Portability</td>
+                    <td>Collapsed ≤10 sq ft</td>
+                    <td>Must fit in 20x10 ft trailer with other equipment</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Heat Resistance</td>
+                    <td>Withstands ≥180°F</td>
+                    <td>Midland temperatures; materials must not deform</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>Modularity</td>
+                    <td>≥50% replaceable parts</td>
+                    <td>Enables maintenance; prevents complete loss if one part fails</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- PLACEHOLDER: Pairwise comparison chart -->
+        <div class="highlight-box">
+            <p><strong>📷 IMAGE PLACEHOLDER:</strong> Add pairwise comparison matrix image showing how criteria were ranked (should show Stability=6 points, Rotation=5, Height=4, etc.)</p>
+        </div>
+
+        <h2>Design Process</h2>
+
+        <h3>Problem Decomposition</h3>
+        <p>We broke the complex challenge into functional "Design Blocks"—specific features each mount needed:</p>
+
+        <p><strong>Design Blocks for Both Antennas:</strong></p>
+        <ul>
+            <li>Base: Physical contact with ground, provides stability</li>
+            <li>Elevate Off Ground: Extends height to meet requirements</li>
+            <li>Mounting Mechanism: Securely attaches antenna to structure</li>
+        </ul>
+
+        <p><strong>Yagi-Specific Design Blocks:</strong></p>
+        <ul>
+            <li>Rotation Mechanism: Enables antenna tip to move 0-90° vertically</li>
+            <li>Rotation Action: How operators control and lock rotation</li>
+        </ul>
+
+        <!-- PLACEHOLDER: Design blocks diagram -->
+        <div class="highlight-box">
+            <p><strong>📷 IMAGE PLACEHOLDER:</strong> Add design blocks flowchart showing functional decomposition of antenna mount problem into manageable components</p>
+        </div>
+
+        <h3>Brainstorming & Concept Development</h3>
+
+        <p>Our systematic Engineering Decision Process:</p>
+        <ol>
+            <li>Create Design Blocks based on required functions</li>
+            <li>Brainstorm ideas for each block (2 rounds)</li>
+            <li>Screen partial ideas using Pugh charts</li>
+            <li>Morph surviving partials into complete designs</li>
+            <li>Categorize complete designs by base type</li>
+            <li>Screen complete designs using Pugh charts</li>
+            <li>Score finalists using weighted criteria</li>
+            <li>Select optimal design</li>
+        </ol>
+
+        <p><strong>Brainstorming Results:</strong></p>
+        <ul>
+            <li>Round 1: 40 ideas (4 complete, 33 partial)</li>
+            <li>Round 2: 24 ideas (4 complete, 20 partial)</li>
+            <li>Total: 61 unique ideas → 8 complete concepts, 53 partial concepts</li>
+        </ul>
+
+        <!-- PLACEHOLDER: Brainstorming documentation -->
+        <div class="highlight-box">
+            <p><strong>📷 IMAGE PLACEHOLDER:</strong> Add brainstorming session photo or documented ideas sheet showing team ideation process</p>
+        </div>
+
+        <h3>Screening & Morphing</h3>
+
+        <p>We used Pugh screening to eliminate suboptimal partial ideas:</p>
+        <ul>
+            <li>Bases: 10 → 7 (removed suction cup, rubber mat)</li>
+            <li>Elevate Off Ground: 20 → 6 (removed scissor lift, motorized slide, rack & pinion)</li>
+            <li>Rotation Mechanisms: 6 → 3 (removed belt & pulley, axis switches)</li>
+            <li>Mounting Mechanisms: 13 → 7 (removed friction-fit, bendy clamp)</li>
+        </ul>
+
+        <p>From the 27 screened partials, we systematically combined them to create:</p>
+        <ul>
+            <li>30 Omni mount designs</li>
+            <li>30 Yagi mount designs</li>
+        </ul>
+
+        <!-- PLACEHOLDER: Morph chart -->
+        <div class="highlight-box">
+            <p><strong>📷 IMAGE PLACEHOLDER:</strong> Add morphological chart showing how partial ideas were combined across design blocks to create complete concepts</p>
+        </div>
+
+        <h3>Final Selection</h3>
+
+        <p>After Pugh screening each category, we had 8 finalists (4 Omni, 4 Yagi). Using weighted scoring based on our prioritized criteria:</p>
+
+        <p><strong>Top-Scoring Designs:</strong></p>
+        <ul>
+            <li><strong>Omni Winner (3.7/5.0):</strong> Tripod base + foldable sticks (10 ft) + threaded insert mounting</li>
+            <li><strong>Yagi Initial Winner (3.85/5.0):</strong> Backpack base + telescopic pole + ball joint rotation</li>
+        </ul>
+
+        <!-- PLACEHOLDER: Scoring matrix -->
+        <div class="highlight-box">
+            <p><strong>📷 IMAGE PLACEHOLDER:</strong> Add weighted scoring matrix showing finalist designs evaluated against criteria with numerical scores</p>
+        </div>
+
+        <h2>Critical Design Pivot</h2>
+
+        <p>After presenting our initial concepts to Eclipse on October 12, 2024, we received crucial feedback that changed our Yagi design direction.</p>
+
+        <div class="highlight-box">
+            <h3>Client Concern</h3>
+            <p>A backpack-mounted Yagi would transmit operator body movements to the antenna, causing connection instability—the very problem we were trying to solve.</p>
+
+            <h3>Our Response</h3>
+            <p>We pivoted to a tripod-based Yagi mount while retaining the ball joint rotation mechanism.</p>
+
+            <p><strong>Impact:</strong></p>
+            <ul>
+                <li>Improved: Guaranteed stability independent of operator movement</li>
+                <li>Trade-off: Slightly reduced portability (tripod vs. wearable)</li>
+                <li>Added benefit: Easier operator handoff during long launches</li>
+            </ul>
+        </div>
+
+        <!-- PLACEHOLDER: Backpack prototype -->
+        <div class="highlight-box">
+            <p><strong>📷 IMAGE PLACEHOLDER:</strong> Add photo of backpack-mounted Yagi prototype that was abandoned after client feedback (if available from EDES project)</p>
+        </div>
+
+        <h2>Final Design Specifications</h2>
+
+        <h3>Omni Mount Design</h3>
+        <ul>
+            <li>Collapsible aluminum tripod base (retail)</li>
+            <li>Foldable wooden sticks extending to 10+ ft</li>
+            <li>Cam lever hinge locks for quick vertical extension</li>
+            <li>Threaded insert antenna mounting</li>
+            <li>Compact collapsed footprint (<10 sq ft)</li>
+        </ul>
+
+        <!-- PLACEHOLDER: Final Omni design -->
+        <div class="highlight-box">
+            <p><strong>📷 IMAGE PLACEHOLDER:</strong> Add final Omni mount design rendering or photo showing tripod base with folding extension sticks</p>
+        </div>
+
+        <h3>Yagi Mount Design</h3>
+        <ul>
+            <li>Collapsible aluminum tripod base</li>
+            <li>Telescopic aluminum pole extending to 5 ft</li>
+            <li>Free-moving ball joint for 0-90° rotation</li>
+            <li>3D-printed PETG clamp (heat resistant to 230°F)</li>
+            <li>Ergonomic handle for operator control</li>
+        </ul>
+
+        <!-- PLACEHOLDER: Final Yagi design -->
+        <div class="highlight-box">
+            <p><strong>📷 IMAGE PLACEHOLDER:</strong> Add final Yagi mount design rendering or photo showing tripod with ball joint and mounted antenna</p>
+        </div>
+
+        <p><strong>Materials Selected:</strong></p>
+        <ul>
+            <li>Structural: Aluminum (tripods, telescopic poles), wood (Omni folding sticks)</li>
+            <li>3D Printed: ABS or PETG (heat resistant, signal transparent)</li>
+            <li>Hardware: Stainless steel fasteners, threaded inserts</li>
+            <li>Grips: Foam padding for operator comfort</li>
+        </ul>
+
+        <h2>Prototype Development</h2>
+
+        <h3>Low-Fidelity Prototype</h3>
+        <p>Using cardboard, foam core, and wooden dowels, we visualized the overall design and verified basic dimensions. This phase confirmed our 10 ft Omni height was achievable and that the ball joint provided adequate rotation range (95°).</p>
+
+        <h3>Medium-Fidelity Prototype</h3>
+        <p>We tested functional materials with real antenna weights. Key findings:</p>
+        <ul>
+            <li>✓ Stability: Both mounts withstood simulated 20 mph wind with <6" sway</li>
+            <li>✓ Height: Omni reached 10.5 ft, Yagi 4.8 ft</li>
+            <li>✗ Setup Time: Initial assembly took 42 minutes (exceeded 30 min target)</li>
+        </ul>
+
+        <h3>Hinge Mechanism Evolution</h3>
+        <p>The Omni mount's hinge locks went through multiple iterations:</p>
+        <ol>
+            <li><strong>Bolt & Nut:</strong> Secure but required wrench—too slow</li>
+            <li><strong>3D-Printed Clips:</strong> Tool-free but deformed under repeated use</li>
+            <li><strong>Wing Nuts:</strong> Tool-free but loosened under vibration</li>
+            <li><strong>Cam Lever Clamps (Final):</strong> Quick-release, secure, no tools needed ✓</li>
+        </ol>
+
+        <!-- PLACEHOLDER: Hinge iterations -->
+        <div class="highlight-box">
+            <p><strong>📷 IMAGE PLACEHOLDER:</strong> Add 3-4 photos showing hinge lock evolution: bolt system → 3D printed clip → cam lever final design</p>
+        </div>
+
+        <h2>My Contributions</h2>
+
+        <p>Throughout this project, I focused on mechanical design and hands-on prototyping:</p>
+
+        <ul>
+            <li><strong>Low-Fidelity:</strong> Created ball joint mechanism prototype using foam and rubber balloon to test rotation concept</li>
+            <li><strong>Medium-Fidelity:</strong> Designed tripod-to-Yagi attachments, developed Omni extension system, created Yagi handle, designed stopping mechanism</li>
+            <li><strong>Testing:</strong> Conducted angle testing for Yagi (verified 90° rotation with protractor), performed clamp and hinge durability testing</li>
+            <li><strong>CAD:</strong> Helped model clamp design in SolidWorks for mounting antenna to our system</li>
+            <li><strong>Field Testing:</strong> Accompanied team to actual Rice Eclipse launch to test high-fidelity prototype in real conditions</li>
+        </ul>
+
+        <h2>Field Testing Results</h2>
+
+        <p>The ultimate validation came when we deployed both mounts at an actual Rice Eclipse launch in Midland, Texas. Testing under real-world conditions revealed details we couldn't have discovered in the lab.</p>
+
+        <div class="highlight-box">
+            <h3>Launch Site Performance</h3>
+            <p>Our prototypes successfully withstood:</p>
+            <ul>
+                <li>Actual antenna loads during multi-hour launch operations</li>
+                <li>18-20 mph wind conditions typical of Midland, Texas</li>
+                <li>Sandy terrain requiring stable tripod feet</li>
+                <li>Temperature extremes throughout the day</li>
+            </ul>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Criterion</th>
+                    <th>Target</th>
+                    <th>Test Result</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Stability</td>
+                    <td>≤8" sway</td>
+                    <td><6" antenna displacement</td>
+                    <td>✅ PASS</td>
+                </tr>
+                <tr>
+                    <td>Rotation</td>
+                    <td>0-90° vertical</td>
+                    <td>90° achieved with protractor</td>
+                    <td>✅ PASS</td>
+                </tr>
+                <tr>
+                    <td>Height</td>
+                    <td>Omni ≥10 ft</td>
+                    <td>11' 4" to antenna base</td>
+                    <td>✅ PASS</td>
+                </tr>
+                <tr>
+                    <td>Ease of Use</td>
+                    <td>≤30 min setup</td>
+                    <td>~30-40 seconds per mount</td>
+                    <td>✅ PASS</td>
+                </tr>
+                <tr>
+                    <td>Portability</td>
+                    <td>≤10 sq ft</td>
+                    <td>~1.5 sq ft each collapsed</td>
+                    <td>✅ PASS</td>
+                </tr>
+                <tr>
+                    <td>Heat Resistance</td>
+                    <td>≥180°F</td>
+                    <td>PETG rated to 230°F</td>
+                    <td>✅ PASS</td>
+                </tr>
+                <tr>
+                    <td>Modularity</td>
+                    <td>≥50% replaceable</td>
+                    <td>Yagi: 50%, Omni: 57%</td>
+                    <td>✅ PASS</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p><strong>All design criteria met or exceeded!</strong> The cam lever clamps reduced setup time from our initial 42 minutes to under 1 minute per major assembly—a 98% improvement that far exceeded our 30-minute target.</p>
+
+        <h2>What I Learned</h2>
+
+        <h3>Technical Skills</h3>
+        <ul>
+            <li><strong>Engineering Design Process:</strong> Experienced the complete cycle from problem definition through field-tested solution</li>
+            <li><strong>Systematic Design Methods:</strong> Applied pairwise comparison, Pugh screening, morphological charts, and weighted scoring</li>
+            <li><strong>CAD & Prototyping:</strong> Used SolidWorks for design and 3D printing for functional components</li>
+            <li><strong>Material Selection:</strong> Learned to choose materials based on environmental conditions (heat, UV, strength requirements)</li>
+            <li><strong>Testing Methodologies:</strong> Developed protocols that simulate real-world conditions, not just ideal lab scenarios</li>
+        </ul>
+
+        <h3>Design Process Insights</h3>
+        <ul>
+            <li><strong>Client Feedback is Critical:</strong> The backpack pivot showed how user insights reveal issues engineers might miss</li>
+            <li><strong>Iteration Reveals Solutions:</strong> The hinge lock evolution proved that the first working design isn't necessarily the best design</li>
+            <li><strong>Real-World Testing is Different:</strong> Lab wind simulation couldn't replicate the unpredictable gusts and terrain of an actual launch site</li>
+            <li><strong>Systematic Beats Arbitrary:</strong> Our structured EDP prevented us from fixating on early ideas and ensured we explored the solution space thoroughly</li>
+        </ul>
+
+        <h3>Team Collaboration</h3>
+        <ul>
+            <li>Worked effectively in a five-person team with diverse skills and schedules</li>
+            <li>Used iMessage and 4x/week in-person meetings to coordinate work</li>
+            <li>Implemented agendas and weekly syncs to resolve communication issues</li>
+            <li>Learned that everyone's contribution matters, even when workloads appear uneven</li>
+        </ul>
+
+        <h2>Project Impact</h2>
+
+        <div class="highlight-box">
+            <p>Rice Eclipse now has professional, field-tested antenna mounting systems that support their ambitious goal of reaching 100,000 feet. By eliminating the need to manually hold antennas and providing stable, repeatable positioning, our design enables the telemetry team to focus on what matters: maintaining reliable communication with their rockets.</p>
+            
+            <p>This project demonstrated the power of systematic engineering design. Starting with 61 ideas and methodically narrowing them to 2 optimal solutions produced mounts that not only met every design criterion but exceeded them—particularly in ease of use, where we achieved setup times 50x faster than our target.</p>
+        </div>
+
+        <h2>Team TeleTubbies</h2>
+        <p><strong>Team Members:</strong> Samer Marmash, Lilly Smith, Gabbi Arenas, Tyler Fu, Logan Lu</p>
+        <p><strong>Client:</strong> Rice Eclipse Rocketry Team</p>
+        <p><strong>Course:</strong> EDES 120/220 Engineering Design</p>
+        <p><strong>Semester:</strong> Fall 2025</p>
+
+        <a href="portfolio.html#projects" class="back-button">← Back to Projects</a>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Samer Marmash | Mechanical Engineering @ Rice University</p>
+        <p style="margin-top: 0.5rem;">
+            <a href="mailto:samer.marmash@rice.edu">Email</a> | 
+            <a href="https://linkedin.com/in/samermarmash" target="_blank">LinkedIn</a>
+        </p>
+    </footer>
+</body>
+</html>

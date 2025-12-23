@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samer Marmash | Mechanical Engineering Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --rice-blue: #00205B;
+            --rice-blue-light: #003C71;
+            --accent: #007396;
+            --bg: #ffffff;
+            --text: #333333;
+            --light-bg: #f5f7fa;
+            --border: #e0e0e0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--rice-blue);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: white;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--rice-blue) 0%, var(--rice-blue-light) 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero .tagline {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .hero .cta {
+            display: inline-block;
+            background: white;
+            color: var(--rice-blue);
+            padding: 0.8rem 2rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+
+        .hero .cta:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Section */
+        section {
+            padding: 4rem 2rem;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            color: var(--rice-blue);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        section .subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .about-photo img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .about-content h3 {
+            color: var(--rice-blue);
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .about-content p {
+            margin-bottom: 1rem;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .skill-card {
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .skill-card h4 {
+            color: var(--rice-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .project-card .content {
+            padding: 1.5rem;
+        }
+
+        .project-card h3 {
+            color: var(--rice-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-card .tech {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .project-card .status {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: #e8f4f8;
+            color: var(--accent);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+
+        .project-card .status.in-progress {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .project-card .status.completed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        /* Project Detail Page */
+        .project-header {
+            background: linear-gradient(135deg, var(--rice-blue) 0%, var(--rice-blue-light) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .project-header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-header .meta {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .project-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .project-content h2 {
+            color: var(--rice-blue);
+            margin: 2.5rem 0 1rem 0;
+            font-size: 2rem;
+        }
+
+        .project-content h3 {
+            color: var(--rice-blue);
+            margin: 2rem 0 0.8rem 0;
+            font-size: 1.5rem;
+        }
+
+        .project-content p {
+            margin-bottom: 1.2rem;
+            line-height: 1.8;
+        }
+
+        .project-content ul, .project-content ol {
+            margin-left: 2rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .project-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Image Grid */
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .image-container {
+            text-align: center;
+        }
+
+        .image-container img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 0.5rem;
+        }
+
+        .image-caption {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: var(--light-bg);
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 5px;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            border-left: 3px solid var(--accent);
+            margin: 2rem 0;
+        }
+
+        .timeline-item {
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.5rem;
+            top: 0.5rem;
+            width: 1rem;
+            height: 1rem;
+            background: var(--accent);
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+
+        .timeline-item h4 {
+            color: var(--rice-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--rice-blue);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Back Button */
+        .back-button {
+            display: inline-block;
+            margin: 2rem 0;
+            padding: 0.8rem 1.5rem;
+            background: var(--rice-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: opacity 0.3s;
+        }
+
+        .back-button:hover {
+            opacity: 0.9;
+        }
+
+        /* Two Column Layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="#home" class="logo">Samer Marmash</a>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <h1>Samer Marmash</h1>
+        <p class="tagline">Mechanical Engineering Student | Rice University<br>
+        Building innovative solutions through hands-on design and prototyping</p>
+        <a href="#projects" class="cta">View My Projects</a>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <p class="subtitle">Mechanical engineering student passionate about robotics, automotive systems, and hands-on prototyping</p>
+            
+            <div class="about-grid">
+                <div class="about-photo">
+                    <img src="profile-photo.jpg" alt="Samer Marmash">
+                    <!-- PLACEHOLDER: Add professional headshot here
+                         Recommended: Square format, 800x800px minimum
+                         Options: 
+                         - Use one of the launch site photos
+                         - Professional headshot
+                         - Casual photo that represents you well
+                         Save as: profile-photo.jpg -->
+                </div>
+                <div class="about-content">
+                    <p>I'm a Mechanical Engineering student at Rice University with a minor in Engineering Design, expected to graduate in May 2027. What excites me most about engineering is working on projects hands-on—prototyping and building physical solutions where I can see tangible results from my work.</p>
+                    
+                    <p>I'm pursuing a career in robotics and automotive engineering, where I can combine my passion for hands-on design with cutting-edge technology. After graduation, I plan to either work in the automotive or automation industry, or eventually start my own company focused on innovative mechanical systems.</p>
+
+                    <h3>What Drives Me</h3>
+                    <p>The process of building something from concept to reality and seeing the end result come to life always makes me incredibly happy and motivated. Whether it's designing a robotic prosthetic hand to help people feel with their fingertips, building antenna systems for rocket telemetry, or customizing electric bikes, I love the challenge of turning ideas into working prototypes.</p>
+
+                    <h3>Technical Skills</h3>
+                    <div class="skills-grid">
+                        <div class="skill-card">
+                            <h4>CAD & Design</h4>
+                            <p>SolidWorks, Fusion 360, OnShape, AutoCAD</p>
+                        </div>
+                        <div class="skill-card">
+                            <h4>Manufacturing</h4>
+                            <p>3D Printing, CNC Machining, MIG Welding, Manual Machining</p>
+                        </div>
+                        <div class="skill-card">
+                            <h4>Programming</h4>
+                            <p>Python, MATLAB, Java, JavaScript, C++, Arduino</p>
+                        </div>
+                        <div class="skill-card">
+                            <h4>Hardware & Electronics</h4>
+                            <p>Arduino, Servo Systems, Sensor Integration, Circuit Design</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2>Featured Projects</h2>
+            <p class="subtitle">A selection of mechanical engineering projects showcasing design, prototyping, and problem-solving</p>
+            
+            <div class="projects-grid">
+                <!-- Prosthetic Hand -->
+                <div class="project-card" onclick="window.location.href='prosthetic-hand.html'">
+                    <img src="prosthetic-assembly.png" alt="Robotic Prosthetic Hand">
+                    <div class="content">
+                        <span class="status in-progress">In Progress</span>
+                        <h3>Robotic Prosthetic Hand with Haptic Feedback</h3>
+                        <p class="tech">Arduino • Fusion 360 • FSR Sensors • Servo Motors</p>
+                        <p>Designed 5-finger articulated prosthetic with force-sensitive haptic feedback enabling users to feel grip pressure through vibration motors.</p>
+                    </div>
+                </div>
+
+                <!-- Telemetry System -->
+                <div class="project-card" onclick="window.location.href='telemetry-system.html'">
+                    <img src="samer-launch-site-2.jpg" alt="Rocket Telemetry System">
+                    <div class="content">
+                        <span class="status completed">Completed</span>
+                        <h3>Rocket Telemetry Antenna Mounts</h3>
+                        <p class="tech">SolidWorks • Mechanical Design • Field Testing</p>
+                        <p>Engineered dual antenna mounting systems for Rice Eclipse rocketry team, tested at actual launch reaching 25,163 feet.</p>
+                    </div>
+                </div>
+
+                <!-- Electric Bike -->
+                <div class="project-card" onclick="window.location.href='electric-bike.html'">
+                    <img src="ebike-riding.jpg" alt="Custom Electric Bike">
+                    <div class="content">
+                        <span class="status completed">Completed</span>
+                        <h3>Custom Electric Bike Build</h3>
+                        <p class="tech">Carbon Fiber • 3D Printing • TPU Throttle • Electrical Systems</p>
+                        <p>Built custom e-bike from individual components with carbon fiber weight reduction and 5-iteration TPU thumb throttle. Two years of daily use for campus commuting.</p>
+                    </div>
+                </div>
+
+                <!-- Go-Kart (Future Project) -->
+                <div class="project-card" onclick="alert('Exciting project planned for Summer 2026!')">
+                    <img src="https://via.placeholder.com/400x250/00205B/ffffff?text=Coming+Summer+2026" alt="Custom Go-Kart Project">
+                    <div class="content">
+                        <span class="status in-progress">Planned - Summer 2026</span>
+                        <h3>Custom Go-Kart Build</h3>
+                        <p class="tech">Chassis Design • Engine Integration • Safety Systems</p>
+                        <p>Upcoming project: Design and fabricate a custom go-kart from scratch, applying mechanical engineering principles to create a high-performance recreational vehicle.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2>Get In Touch</h2>
+            <p class="subtitle">Interested in collaborating or learning more about my work?</p>
+            <div style="text-align: center; margin-top: 2rem;">
+                <p style="font-size: 1.2rem; margin-bottom: 1rem;">
+                    <strong>Email:</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cebdafa3abbce0a3afbca3afbda68ebca7adabe0abaabb">[email&#160;protected]</a>
+                </p>
+                <p style="font-size: 1.2rem; margin-bottom: 1rem;">
+                    <strong>Phone:</strong> (346) 303-9305
+                </p>
+                <p style="font-size: 1.2rem;">
+                    <strong>LinkedIn:</strong> <a href="https://linkedin.com/in/samermarmash" target="_blank" style="color: var(--accent);">linkedin.com/in/samermarmash</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Samer Marmash | Mechanical Engineering @ Rice University</p>
+        <p style="margin-top: 0.5rem;">
+            <a href="/cdn-cgi/l/email-protection#1261737f77603c7f73607f73617a52607b71773c777667">Email</a> | 
+            <a href="https://linkedin

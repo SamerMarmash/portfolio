@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robotic Prosthetic Hand | Samer Marmash</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --rice-blue: #00205B;
+            --rice-blue-light: #003C71;
+            --accent: #007396;
+            --bg: #ffffff;
+            --text: #333333;
+            --light-bg: #f5f7fa;
+            --border: #e0e0e0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+        }
+
+        nav {
+            background: var(--rice-blue);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: white;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        .project-header {
+            background: linear-gradient(135deg, var(--rice-blue) 0%, var(--rice-blue-light) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .project-header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-header .meta {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .project-header .status {
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            margin-top: 1rem;
+            font-weight: 600;
+        }
+
+        .project-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .project-content h2 {
+            color: var(--rice-blue);
+            margin: 2.5rem 0 1rem 0;
+            font-size: 2rem;
+            border-bottom: 3px solid var(--accent);
+            padding-bottom: 0.5rem;
+        }
+
+        .project-content h3 {
+            color: var(--rice-blue);
+            margin: 2rem 0 0.8rem 0;
+            font-size: 1.5rem;
+        }
+
+        .project-content p {
+            margin-bottom: 1.2rem;
+            line-height: 1.8;
+        }
+
+        .project-content ul, .project-content ol {
+            margin-left: 2rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .project-content li {
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .image-container {
+            text-align: center;
+        }
+
+        .image-container img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 0.5rem;
+        }
+
+        .image-caption {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        .highlight-box {
+            background: var(--light-bg);
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 5px;
+        }
+
+        .highlight-box h3 {
+            margin-top: 0;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            border-left: 3px solid var(--accent);
+            margin: 2rem 0;
+        }
+
+        .timeline-item {
+            margin-bottom: 2.5rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.5rem;
+            top: 0.5rem;
+            width: 1rem;
+            height: 1rem;
+            background: var(--accent);
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+
+        .timeline-item h4 {
+            color: var(--rice-blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin: 2rem 0;
+            padding: 0.8rem 1.5rem;
+            background: var(--rice-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: opacity 0.3s;
+        }
+
+        .back-button:hover {
+            opacity: 0.9;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-box {
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-box .number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            display: block;
+        }
+
+        .stat-box .label {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        footer {
+            background: var(--rice-blue);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .project-header h1 {
+                font-size: 2rem;
+            }
+
+            .image-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="portfolio.html" class="logo">Samer Marmash</a>
+            <ul>
+                <li><a href="portfolio.html#home">Home</a></li>
+                <li><a href="portfolio.html#about">About</a></li>
+                <li><a href="portfolio.html#projects">Projects</a></li>
+                <li><a href="portfolio.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="project-header">
+        <h1>Robotic Prosthetic Hand with Haptic Feedback</h1>
+        <p class="meta">January 2025 - Present | Team Project</p>
+        <span class="status">🚧 In Progress - Low Fidelity Prototype</span>
+    </div>
+
+    <div class="project-content">
+        <a href="portfolio.html#projects" class="back-button">← Back to Projects</a>
+
+        <h2>Project Overview</h2>
+        <p>During the summer of 2024, I started designing a robotic prosthetic hand that enables users to feel what they're touching through haptic feedback. The goal is simple but impactful: help people with prosthetic hands feel pressure and texture through their fingertips, restoring a sense of touch that's often lost with traditional prosthetics.</p>
+
+        <p>I'm working on this project with two of my fellow Mechanical Engineering students at Rice, Veer Khona and Eddie Zheng. What started as a summer boredom project has evolved into a comprehensive design challenge that combines mechanical design, electronics, and human-centered engineering.</p>
+
+        <div class="highlight-box">
+            <h3>Why This Project Matters</h3>
+            <p>Most prosthetic hands provide basic grip functionality but lack sensory feedback. Users can't feel how hard they're gripping or what texture they're touching. Our design integrates force-sensitive resistors at each fingertip that map pressure readings to vibration motors on the user's forearm, creating a tactile sensation that mimics the sense of touch.</p>
+        </div>
+
+        <h2>Technical Specifications</h2>
+
+        <div class="stats-grid">
+            <div class="stat-box">
+                <span class="number">5</span>
+                <span class="label">Articulated Fingers</span>
+            </div>
+            <div class="stat-box">
+                <span class="number">90°</span>
+                <span class="label">Range of Motion per Joint</span>
+            </div>
+            <div class="stat-box">
+                <span class="number">0-10N</span>
+                <span class="label">Grip Pressure Detection</span>
+            </div>
+            <div class="stat-box">
+                <span class="number">6</span>
+                <span class="label">Design Iterations</span>
+            </div>
+        </div>
+
+        <h3>Key Components</h3>
+        <ul>
+            <li><strong>Control System:</strong> Arduino Uno microcontroller processing sensor data at 100Hz with PID control algorithm</li>
+            <li><strong>Sensors:</strong> FSR Model 402 force-sensitive resistors at each fingertip detecting 0-10N grip pressure with ±5% accuracy</li>
+            <li><strong>Actuation:</strong> Servo motors in forearm pulling fishing line through finger segments for articulated movement</li>
+            <li><strong>Haptic Feedback:</strong> Vibration motors (0-255 PWM) mounted on user's forearm providing proportional force feedback</li>
+            <li><strong>Return Mechanism:</strong> Rubber bands with custom hook design providing elastic return to open position</li>
+            <li><strong>Structure:</strong> 3D-printed components designed in Fusion 360 with male/female joint system</li>
+        </ul>
+
+        <h2>Design Process & CAD Renderings</h2>
+        <p>We're currently in the low-fidelity prototype stage, working through multiple design iterations in Fusion 360. Each component has been carefully designed to balance functionality, manufacturability, and ease of assembly.</p>
+
+        <div class="image-grid">
+            <div class="image-container">
+                <img src="prosthetic-assembly.png" alt="Complete prosthetic hand assembly">
+                <p class="image-caption">Complete assembly showing forearm, palm, and servo mounts</p>
+            </div>
+            <div class="image-container">
+                <img src="prosthetic-fingertip.png" alt="Fingertip sensor design">
+                <p class="image-caption">Fingertip design with FSR sensor cavity and connection interface</p>
+            </div>
+            <div class="image-container">
+                <img src="prosthetic-phalange.png" alt="Finger segment design">
+                <p class="image-caption">Phalange with rod joints, rubber band hooks, and fishing line holes</p>
+            </div>
+        </div>
+
+        <h2>Iterative Design Evolution</h2>
+
+        <h3>Forearm & Servo Mounting</h3>
+        <p>Our first major challenge was determining where to position the servo motors and haptic feedback motors within the limited space of the forearm. We went through several iterations testing different servo orientations and mounting strategies.</p>
+
+        <p><strong>Key Design Decisions:</strong></p>
+        <ul>
+            <li>Servo motors mounted in forearm section to reduce weight in the hand</li>
+            <li>Individual servo mounts for each finger allowing independent control</li>
+            <li>Integrated channels for fishing line routing from servos through palm to fingers</li>
+            <li>Haptic vibration motors positioned along forearm for maximum sensation transfer to user</li>
+        </ul>
+
+        <h3>Fingertip Sensor Integration</h3>
+        <p>The fingertip design went through several major revisions as we experimented with different approaches to integrate the FSR sensors while keeping them protected and functional.</p>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <h4>Iteration 1: Direct Adhesive Mount</h4>
+                <p>Our first approach was to glue the FSR sensor directly to the fingertip. While simple, this left the sensor exposed and vulnerable to damage, and didn't provide a clean aesthetic.</p>
+            </div>
+
+            <div class="timeline-item">
+                <h4>Iteration 2: Surface Mount Design</h4>
+                <p>We tried mounting the sensor on the outer surface with a protective cover, but this made the fingertip bulky and didn't reliably transmit force to the sensor.</p>
+            </div>
+
+            <div class="timeline-item">
+                <h4>Final Design: Integrated Mold</h4>
+                <p>We settled on a molded cavity design that encapsulates the FSR sensor inside the fingertip. The curved outer surface naturally channels force to the sensor while keeping it hidden and protected. This design looks professional and performs reliably.</p>
+            </div>
+        </div>
+
+        <h3>Phalange (Finger Segment) Development</h3>
+        <p>The finger segments (phalanges) required the most iterations as they integrate multiple mechanical systems: joints, actuation, and return mechanisms.</p>
+
+        <p><strong>Challenges We Solved:</strong></p>
+        <ul>
+            <li><strong>Rubber Band Hook Design:</strong> Initial hooks were too shallow and rubber bands would slip off during movement. We redesigned with deeper, more secure hooks that reliably retain the bands through full range of motion.</li>
+            <li><strong>Fishing Line Routing:</strong> Determining optimal hole placement along the phalange body for fishing line was critical. Too close to the joint and the line would bind; too far and we'd lose mechanical advantage. We iterated hole positions through testing to find the sweet spot.</li>
+            <li><strong>Wiring Channels:</strong> Had to integrate dedicated channels for sensor wiring from fingertips through each phalange segment without interfering with fishing line or joint movement.</li>
+            <li><strong>Joint Mechanism:</strong> Tested several joint designs before settling on male/female cylindrical connections with through-holes for metal rod pins. This provides smooth rotation, easy assembly, and good durability.</li>
+        </ul>
+
+        <h2>Testing & Current Status</h2>
+
+        <h3>Component Testing</h3>
+        <p>While we haven't assembled the complete prototype yet, we've been systematically testing individual components:</p>
+
+        <ul>
+            <li><strong>FSR Sensor Calibration:</strong> Using a resistance meter, we've tested grip pressure detection accuracy and confirmed the FSR 402 sensors provide reliable readings across the 0-10N range we need.</li>
+            <li><strong>Servo Actuation:</strong> Tested finger bending motion with different servo torques and fishing line tensions to optimize for smooth, controlled movement without overloading the motors.</li>
+            <li><strong>Haptic Feedback Mapping:</strong> Programmed Arduino to map sensor resistance values to PWM vibration motor intensities, testing different mapping algorithms to find the most intuitive tactile sensation.</li>
+            <li><strong>Joint Durability:</strong> Cycled the phalange joints through hundreds of repetitions to verify the male/female pin connection maintains smooth rotation without excessive wear.</li>
+        </ul>
+
+        <div class="highlight-box">
+            <h3>Current Project Status: Low-Fidelity Prototype</h3>
+            <p>We're currently at the low-fidelity prototype stage. All major components have been designed in CAD and individually tested, but we haven't yet assembled the complete integrated system. Our next steps are:</p>
+            <ol>
+                <li>3D print all finger segments and assembly components</li>
+                <li>Complete forearm assembly with servo motors and electronics</li>
+                <li>Integrate fishing line actuation system</li>
+                <li>Install FSR sensors in all fingertips</li>
+                <li>Connect haptic feedback motors to forearm</li>
+                <li>Test complete system with grip and release cycles</li>
+                <li>Refine control algorithms based on real-world testing</li>
+            </ol>
+        </div>
+
+        <h2>What I Learned</h2>
+
+        <h3>Technical Skills</h3>
+        <ul>
+            <li><strong>CAD Modeling:</strong> Became proficient with Fusion 360 for complex assemblies with moving parts, learned to design for 3D printing manufacturability</li>
+            <li><strong>Arduino Programming:</strong> Implemented PID control for servo motors and real-time sensor data processing</li>
+            <li><strong>Sensor Integration:</strong> Gained hands-on experience with FSR sensors, understanding resistance-to-force relationships and calibration techniques</li>
+            <li><strong>Mechanical Design:</strong> Learned about joint mechanisms, actuation systems, and designing for assembly and disassembly</li>
+        </ul>
+
+        <h3>Design Process</h3>
+        <ul>
+            <li><strong>Iteration is Essential:</strong> Our best solutions came after multiple failed attempts. The fingertip sensor design, for example, only worked well on the third major revision.</li>
+            <li><strong>Test Early, Test Often:</strong> Testing individual components before full assembly saved us from discovering major flaws late in the process.</li>
+            <li><strong>Balance Complexity and Functionality:</strong> Had to make trade-offs between ideal functionality and practical manufacturability, especially with 3D printing constraints.</li>
+            <li><strong>User-Centered Design Matters:</strong> Kept returning to the question: "Will this actually help someone use a prosthetic hand more effectively?" This guided our feature prioritization.</li>
+        </ul>
+
+        <h3>Collaboration</h3>
+        <p>Working with Veer and Eddie taught me a lot about collaborative engineering. We divided responsibilities based on our strengths—I focused primarily on mechanical design and CAD modeling, while my teammates worked on electronics integration and programming. Regular team meetings kept us aligned and allowed us to catch design conflicts early.</p>
+
+        <h2>Next Steps</h2>
+        <p>As we move forward with this project, our priorities are:</p>
+        <ol>
+            <li><strong>Complete Low-Fi Assembly:</strong> 3D print and assemble all components to create our first working prototype</li>
+            <li><strong>System Integration Testing:</strong> Test the complete integrated system with all sensors, actuators, and feedback mechanisms working together</li>
+            <li><strong>Control Algorithm Refinement:</strong> Tune PID parameters and haptic feedback mapping based on real-world performance</li>
+            <li><strong>User Testing:</strong> If possible, get feedback from potential users or occupational therapists about the design and functionality</li>
+            <li><strong>Medium-Fidelity Iteration:</strong> Based on testing results, redesign problem areas and move to more refined fabrication methods</li>
+            <li><strong>Grip Testing:</strong> Evaluate ability to grasp different objects (soft/hard, light/heavy) and adjust force sensing accordingly</li>
+        </ol>
+
+        <div class="highlight-box">
+            <h3>Project Impact</h3>
+            <p>While this started as a summer project to learn new skills and stay engaged with engineering, it's evolved into something potentially meaningful. If successful, our design could demonstrate a low-cost approach to adding sensory feedback to prosthetic hands, making this technology more accessible to people who need it.</p>
+        </div>
+
+        <a href="portfolio.html#projects" class="back-button">← Back to Projects</a>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Samer Marmash | Mechanical Engineering @ Rice University</p>
+        <p style="margin-top: 0.5rem;">
+            <a href="mailto:samer.marmash@rice.edu">Email</a> | 
+            <a href="https://linkedin.com/in/samermarmash" target="_blank">LinkedIn</a>
+        </p>
+    </footer>
+</body>
+</html>

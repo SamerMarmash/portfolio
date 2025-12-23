@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Electric Bike | Samer Marmash</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --rice-blue: #00205B;
+            --rice-blue-light: #003C71;
+            --accent: #007396;
+            --bg: #ffffff;
+            --text: #333333;
+            --light-bg: #f5f7fa;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+        }
+
+        nav {
+            background: var(--rice-blue);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: white;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        .project-header {
+            background: linear-gradient(135deg, var(--rice-blue) 0%, var(--rice-blue-light) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .project-header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-header .meta {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .project-header .status {
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            background: rgba(40, 167, 69, 0.3);
+            border-radius: 20px;
+            margin-top: 1rem;
+            font-weight: 600;
+        }
+
+        .project-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .project-content h2 {
+            color: var(--rice-blue);
+            margin: 2.5rem 0 1rem 0;
+            font-size: 2rem;
+            border-bottom: 3px solid var(--accent);
+            padding-bottom: 0.5rem;
+        }
+
+        .project-content h3 {
+            color: var(--rice-blue);
+            margin: 2rem 0 0.8rem 0;
+            font-size: 1.5rem;
+        }
+
+        .project-content p {
+            margin-bottom: 1.2rem;
+            line-height: 1.8;
+        }
+
+        .project-content ul {
+            margin-left: 2rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .project-content li {
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .image-container {
+            text-align: center;
+        }
+
+        .image-container img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 0.5rem;
+        }
+
+        .image-caption {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        .highlight-box {
+            background: var(--light-bg);
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 5px;
+        }
+
+        .highlight-box h3 {
+            margin-top: 0;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin: 2rem 0;
+            padding: 0.8rem 1.5rem;
+            background: var(--rice-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: opacity 0.3s;
+        }
+
+        .back-button:hover {
+            opacity: 0.9;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-box {
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-box .number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            display: block;
+        }
+
+        .stat-box .label {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        footer {
+            background: var(--rice-blue);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .project-header h1 {
+                font-size: 2rem;
+            }
+
+            .image-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="portfolio.html" class="logo">Samer Marmash</a>
+            <ul>
+                <li><a href="portfolio.html#home">Home</a></li>
+                <li><a href="portfolio.html#about">About</a></li>
+                <li><a href="portfolio.html#projects">Projects</a></li>
+                <li><a href="portfolio.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="project-header">
+        <h1>Custom Electric Bike Build</h1>
+        <p class="meta">December 2024 - Present | Personal Project</p>
+        <span class="status">✅ Completed & In Daily Use</span>
+    </div>
+
+    <div class="project-content">
+        <a href="portfolio.html#projects" class="back-button">← Back to Projects</a>
+
+        <h2>Project Overview</h2>
+        <p>Why buy an e-bike when you can build one yourself? That was my mindset when I decided to take on this project. I purchased individual components of a fat tire e-bike and challenged myself to assemble it from scratch. As a Mechanical Engineering student who loves building things, this was the perfect hands-on project that combined my passion for design with a practical need—reliable transportation around Rice University's campus.</p>
+
+        <p>What started as a campus commuting solution has evolved into my primary mode of transportation. For the past two years, this bike has been my daily driver, taking me from off-campus housing to classes, the gym, and around Houston on public roads. The 10-minute commute beats walking or waiting for buses, and the custom modifications I've made along the way have turned it into a truly personalized machine.</p>
+
+        <div class="image-container">
+            <img src="ebike-riding.jpg" alt="Riding the custom e-bike">
+            <p class="image-caption">Night ride on the completed custom e-bike</p>
+        </div>
+
+        <h2>Build Specifications</h2>
+
+        <div class="stats-grid">
+            <div class="stat-box">
+                <span class="number">~$1000</span>
+                <span class="label">Total Build Cost</span>
+            </div>
+            <div class="stat-box">
+                <span class="number">2 Years</span>
+                <span class="label">Daily Use</span>
+            </div>
+            <div class="stat-box">
+                <span class="number">28 Miles</span>
+                <span class="label">Range per Charge</span>
+            </div>
+            <div class="stat-box">
+                <span class="number">10 Min</span>
+                <span class="label">Current Commute Time</span>
+            </div>
+            <div class="stat-box">
+                <span class="number">18%</span>
+                <span class="label">Weight Reduction</span>
+            </div>
+        </div>
+
+        <h3>Base Components - VIVI F26FUL E-Bike (2024 Model)</h3>
+        <p>I selected components based on extensive research of the VIVI F26FUL fat tire e-bike platform, studying both the manufacturer's specifications and user builds. This gave me a solid foundation to understand component compatibility and performance expectations. The fat tire design was particularly appealing for Houston's varied terrain and occasional rough roads.</p>
+
+        <p><strong>Key specifications (full details available on VIVI website):</strong></p>
+        <ul>
+            <li>1000W brushless motor for powerful acceleration</li>
+            <li>48V battery system providing 28-mile range</li>
+            <li>Fat tire design for stability and comfort</li>
+            <li>Front suspension fork (later upgraded after accident)</li>
+            <li>Hydraulic disc brakes (regularly maintained)</li>
+        </ul>
+
+        <h2>The Build Process</h2>
+
+        <h3>Initial Assembly</h3>
+        <p>I purchased all components separately and assembled the bike from the ground up. This hands-on approach taught me every detail of how the bike works—from the motor controller wiring to the brake cable routing. Understanding the complete system has been invaluable for troubleshooting and modifications.</p>
+
+        <div class="image-container">
+            <img src="ebike-complete.png" alt="Completed bike before modifications">
+            <p class="image-caption">The bike after initial assembly, before carbon fiber weight reduction</p>
+        </div>
+
+        <h3>Carbon Fiber Weight Reduction</h3>
+        <p>After using the bike for several months, I identified weight as a key area for improvement. The stock components were functional but heavier than necessary, affecting acceleration and battery efficiency. Rice University provides students with access to a carbon fiber 3D printer in the engineering facilities—a resource I couldn't pass up.</p>
+
+        <p>I chose carbon fiber for two key reasons:</p>
+        <ul>
+            <li><strong>Material Properties:</strong> Carbon fiber offers an exceptional strength-to-weight ratio. It's incredibly strong under tension while being significantly lighter than aluminum or steel.</li>
+            <li><strong>Access to Equipment:</strong> Rice's carbon fiber 3D printing capability meant I could prototype and produce parts without expensive outsourcing. This allowed me to iterate designs quickly and affordably.</li>
+        </ul>
+
+        <p><strong>Components replaced with carbon fiber:</strong></p>
+        <ul>
+            <li>Seat post - reduced weight while maintaining rider support</li>
+            <li>Handlebars - improved handling and reduced front-end weight</li>
+            <li>Various mounting brackets and accessories</li>
+        </ul>
+
+        <p><strong>Results:</strong> Achieved a 2.3 lb (18%) overall weight reduction. This might seem small, but on an e-bike, every pound matters for battery efficiency and handling. The bike accelerates noticeably quicker and feels more responsive when maneuvering.</p>
+
+        <h2>Custom Throttle Development</h2>
+
+        <p>The stock wrist-twist throttle worked, but I found it uncomfortable during long rides and difficult to modulate precisely at low speeds. I decided to design and 3D print a custom thumb throttle—a small modification that dramatically improved ride quality.</p>
+
+        <div class="image-grid">
+            <div class="image-container">
+                <img src="ebike-working-1.jpg" alt="Working on throttle mechanism">
+                <p class="image-caption">Testing and refining the custom thumb throttle mechanism</p>
+            </div>
+            <div class="image-container">
+                <img src="ebike-working-2.jpg" alt="Installing throttle components">
+                <p class="image-caption">Installing and adjusting the final throttle design</p>
+            </div>
+        </div>
+
+        <h3>Five Design Iterations</h3>
+
+        <p><strong>Iteration 1: PLA Prototype</strong></p>
+        <p>Started with PLA plastic to quickly test the basic geometry and mounting approach. Learned immediately that PLA was too rigid and would crack under repeated thumb pressure.</p>
+
+        <p><strong>Iteration 2: TPU Initial Design</strong></p>
+        <p>Switched to TPU (thermoplastic polyurethane) for its flexibility and durability. This material is tough, malleable, and comfortable on the finger—exactly what I needed. However, the first TPU version was too large and bulky.</p>
+
+        <p><strong>Iteration 3: Size Optimization</strong></p>
+        <p>Reduced the overall dimensions while maintaining structural integrity. Tested different thumb contact surface sizes to find the sweet spot between comfort and control.</p>
+
+        <p><strong>Iteration 4: Mounting Refinement</strong></p>
+        <p>Developed a screw-based tightening mechanism to attach the throttle securely to the original handlebar grip. This took several tries to get the threading right for tool-free installation and removal.</p>
+
+        <p><strong>Final Design: Grip Integration</strong></p>
+        <p>The final iteration uses TPU's natural coefficient of friction to grip onto the original throttle assembly. The screw design allows me to tighten it in place without any adhesives or permanent modifications. The TPU material provides:</p>
+        <ul>
+            <li>Comfortable thumb contact surface that doesn't cause fatigue</li>
+            <li>Excellent grip on the handlebar assembly—no slipping even in rain</li>
+            <li>Durable performance through thousands of actuation cycles</li>
+            <li>Easy removal for maintenance or adjustments</li>
+        </ul>
+
+        <h2>Ongoing Maintenance & Real-World Performance</h2>
+
+        <h3>Regular Maintenance Schedule</h3>
+        <p>After two years of daily use, I've developed a maintenance routine that keeps the bike running reliably:</p>
+
+        <ul>
+            <li><strong>Monthly:</strong> Replace brake pads due to frequent use and Houston's stop-and-go traffic</li>
+            <li><strong>As Needed:</strong> Replace brake cables when fraying is detected during visual inspections</li>
+            <li><strong>Weekly:</strong> Check tire pressure, chain lubrication, and bolt tightness</li>
+            <li><strong>Quarterly:</strong> Full system check including electrical connections and battery health</li>
+        </ul>
+
+        <div class="image-container">
+            <img src="ebike-parts.jpg" alt="Bike disassembled for maintenance">
+            <p class="image-caption">Disassembled for major maintenance and upgrades</p>
+        </div>
+
+        <h3>The Accident & Front Fork Upgrade</h3>
+        <p>About a year into daily use, I was involved in a bike accident that damaged the front fork suspension. Rather than simply replacing it with the stock part, I used this as an opportunity to upgrade to a higher-quality suspension fork with better damping characteristics.</p>
+
+        <div class="highlight-box">
+            <h3>Engineering Analysis Project</h3>
+            <p>I turned this incident into a learning opportunity for my Statics class. I analyzed the stress and strain on the bike frame during the accident, calculated safety factors for various components, and documented the failure mode of the original fork. This analysis helped me select a replacement fork with appropriate load ratings and informed my decisions about component upgrades.</p>
+            <p><em>The full engineering analysis and calculations are available in the attached PDF report.</em></p>
+        </div>
+
+        <h3>Brake System Experiments</h3>
+        <p>One of my recent projects involved experimenting with different brake configurations using recycled materials from a broken electric scooter. I tested various brake pad materials and caliper positions to understand how they affect stopping power and modulation. This hands-on experimentation taught me a lot about brake system design and gave me confidence to work on hydraulic systems.</p>
+
+        <h2>Real-World Performance</h2>
+
+        <h3>Campus Commuting (Year 1)</h3>
+        <p>During my first year with the bike, I lived on campus and used it primarily for getting to classes and the gym. The combination of fat tires and electric assist made navigating Rice's tree-lined paths comfortable and fast, even when carrying a heavy backpack full of textbooks.</p>
+
+        <h3>Off-Campus Transportation (Current)</h3>
+        <p>Now that I live off-campus, the bike has become my primary mode of transportation. My daily commute on public roads takes about 10 minutes—faster than driving and finding parking. The 1000W motor handles Houston's heat and occasional headwinds without issue, and the 28-mile range means I rarely worry about charging during the week.</p>
+
+        <h3>Weather Performance</h3>
+        <p>Houston's unpredictable weather has tested the bike thoroughly:</p>
+        <ul>
+            <li><strong>Heat:</strong> Regular 95°F+ summer temperatures haven't affected performance. The battery and motor stay cool thanks to good airflow.</li>
+            <li><strong>Rain:</strong> The TPU throttle and electrical components have proven water-resistant. I ride in light rain without issues.</li>
+            <li><strong>Humidity:</strong> Houston's humidity meant paying extra attention to metal components for rust, particularly the chain and brake cables.</li>
+        </ul>
+
+        <h2>What I Learned</h2>
+
+        <h3>Technical Skills</h3>
+        <ul>
+            <li><strong>Electrical Systems:</strong> Learned to work with high-voltage DC systems (48V), understand motor controllers, and troubleshoot electrical issues</li>
+            <li><strong>Mechanical Assembly:</strong> Gained hands-on experience with bike mechanics—headsets, bottom brackets, brake bleeding, derailleur adjustment</li>
+            <li><strong>Material Selection:</strong> Developed intuition for choosing materials based on application requirements (stiffness vs. flexibility, weight vs. strength)</li>
+            <li><strong>3D Printing for Functional Parts:</strong> Learned the difference between printing decorative items and engineering components that must survive real-world stress</li>
+            <li><strong>Iterative Design:</strong> The throttle project reinforced that the first design is never the final design—testing and refinement are essential</li>
+        </ul>
+
+        <h3>Design Process</h3>
+        <ul>
+            <li><strong>Research Before Building:</strong> Studying the VIVI F26FUL platform before purchasing components saved me from compatibility issues and poor part choices</li>
+            <li><strong>Incremental Improvements:</strong> Rather than redesigning everything at once, I tackled one upgrade at a time (weight reduction, then throttle, then brakes), learning from each modification</li>
+            <li><strong>Real-World Testing is Critical:</strong> Lab testing can't replicate Houston traffic, summer heat, and daily wear. Field testing revealed issues I never would have anticipated</li>
+            <li><strong>Document Everything:</strong> Keeping notes on maintenance intervals and component lifespans helped me understand failure modes and plan future improvements</li>
+        </ul>
+
+        <h3>Practical Engineering</h3>
+        <ul>
+            <li><strong>Maintenance is Design:</strong> Building something is only half the challenge—keeping it working reliably requires ongoing attention and good design decisions during initial construction</li>
+            <li><strong>Failure Analysis Teaches:</strong> The accident and subsequent fork replacement taught me more about structural mechanics than any classroom example</li>
+            <li><strong>Material Behavior Under Stress:</strong> Watching components wear over time (brake pads, cables, chain) provided hands-on education about fatigue, friction, and material properties</li>
+        </ul>
+
+        <h2>Future Improvements</h2>
+
+        <p>After two years of daily use, I have several ideas for further refinement:</p>
+
+        <ol>
+            <li><strong>Battery Upgrade:</strong> Explore higher-capacity cells to extend range beyond 28 miles</li>
+            <li><strong>Regenerative Braking:</strong> Investigate motor controllers that support regen to improve efficiency and reduce brake wear</li>
+            <li><strong>Custom Lighting System:</strong> Design integrated lighting with better visibility than aftermarket clip-on lights</li>
+            <li><strong>Aerodynamic Improvements:</strong> Although not critical at e-bike speeds, reducing drag could marginally improve range</li>
+            <li><strong>Suspension Tuning:</strong> Fine-tune the upgraded front fork for my specific weight and riding style</li>
+        </ol>
+
+        <h2>Project Impact</h2>
+
+        <div class="highlight-box">
+            <p>This project perfectly captures what drew me to Mechanical Engineering: the ability to design, build, and continuously improve something that serves a real purpose in my daily life. The bike isn't just transportation—it's a rolling testbed for ideas, a platform for learning mechanical and electrical systems, and proof that hands-on engineering leads to better understanding.</p>
+            
+            <p>The skills I developed through this project—electrical troubleshooting, mechanical assembly, material selection, iterative design, and practical maintenance—are directly applicable to my future career in robotics and automotive engineering. More importantly, this project reinforced that engineering isn't just about theory—it's about building things that work, fixing them when they break, and constantly making them better.</p>
+        </div>
+
+        <a href="portfolio.html#projects" class="back-button">← Back to Projects</a>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Samer Marmash | Mechanical Engineering @ Rice University</p>
+        <p style="margin-top: 0.5rem;">
+            <a href="mailto:samer.marmash@rice.edu">Email</a> | 
+            <a href="https://linkedin.com/in/samermarmash" target="_blank">LinkedIn</a>
+        </p>
+    </footer>
+</body>
+</html>
